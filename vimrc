@@ -33,6 +33,9 @@ nmap <D-4> g$
 nmap <D-6> g^
 nmap <D-0> g^
 
+"add some line space for easy reading
+set linespace=4
+
 "disable visual bell
 set visualbell t_vb=
 
