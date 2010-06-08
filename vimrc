@@ -367,11 +367,10 @@ function! s:HighlightLongLines(width)
     endif
 endfunction
 
-
-"CUSTOM
-
 set transparency=5
 
+
+"key mapping for window navigation
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
