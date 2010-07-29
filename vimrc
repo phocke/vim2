@@ -1,5 +1,9 @@
-"Fabio Kung <fabio.kung@gmail.com>
-"
+"necessary on some Linux distros for pathogen to properly load bundles
+filetype off
+
+"load pathogen managed plugins
+call pathogen#runtime_append_all_bundles()
+
 "Use Vim settings, rather then Vi settings (much better!).
 "This must be first, because it changes other options as a side effect.
 set nocompatible
@@ -232,12 +236,6 @@ set scrolloff=3
 set sidescrolloff=7
 set sidescroll=1
 
-"necessary on some Linux distros for pathogen to properly load bundles
-filetype off
-
-"load pathogen managed plugins
-call pathogen#runtime_append_all_bundles()
-
 "load ftplugins and indent files
 filetype plugin on
 filetype indent on
@@ -260,16 +258,17 @@ if has("gui_running")
     "tell the term has 256 colors
     set t_Co=256
 
+    colorscheme railscasts
+    set guitablabel=%M%t
+    set lines=40
+    set columns=115
+
     if has("gui_gnome")
         set term=gnome-256color
         colorscheme ir_dark
         set guifont=Inconsolata\ Medium\ 12
-    else
-        colorscheme railscasts
-        set guitablabel=%M%t
-        set lines=40
-        set columns=115
     endif
+
     if has("gui_mac") || has("gui_macvim")
         set guifont=Menlo:h14
         " key binding for Command-T to behave properly
@@ -283,6 +282,7 @@ if has("gui_running")
         catch
         endtry
     endif
+
     if has("gui_win32") || has("gui_win32s")
         set guifont=Consolas:h12
         set enc=utf-8
@@ -292,7 +292,11 @@ else
     let g:CSApprox_loaded = 1
 endif
 
-nmap <silent> <Leader>p :NERDTreeToggle<CR>
+" PeepOpen uses <Leader>p as well so you will need to redefine it so something
+" else in your ~/.vimrc file, such as:
+" nmap <silent> <Leader>q <Plug>PeepOpen
+
+silent! nmap <silent> <Leader>p :NERDTreeToggle<CR>
 nnoremap <silent> <C-f> :call FindInNERDTree()<CR> 
 
 "make <c-l> clear the highlight as well as redraw
