@@ -1,6 +1,6 @@
 "necessary on some Linux distros for pathogen to properly load bundles
 filetype off
-
+set t_Co=256
 "load pathogen managed plugins
 call pathogen#runtime_append_all_bundles()
 
@@ -58,41 +58,38 @@ set statusline+=[%{GitBranch()}]
 set statusline+=%{exists('g:loaded_rvm')?rvm#statusline():''}
 
 "display a warning if fileformat isnt unix
-"set statusline+=%#warningmsg#
-"set statusline+=%{&ff!='unix'?'['.&ff.']':''}
-"set statusline+=%*
+set statusline+=%#warningmsg#
+set statusline+=%{&ff!='unix'?'['.&ff.']':''}
+set statusline+=%*
 
 "Display a warning if file encoding isnt utf-8
-"set statusline+=%#warningmsg#
-"set statusline+=%{(&fenc!='utf-8'&&&fenc!='')?'['.&fenc.']':''}
-"set statusline+=%*
+set statusline+=%#warningmsg#
+set statusline+=%{(&fenc!='utf-8'&&&fenc!='')?'['.&fenc.']':''}
+set statusline+=%*
 
-"set statusline+=%h      "help file flag
-"set statusline+=%y      "filetype
-"set statusline+=%r      "read only flag
-"set statusline+=%m      "modified flag
+set statusline+=%h      "help file flag
+set statusline+=%y      "filetype
+set statusline+=%r      "read only flag
+set statusline+=%m      "modified flag
 
 "display a warning if &et is wrong, or we have mixed-indenting
-"set statusline+=%#error#
-"set statusline+=%{StatuslineTabWarning()}
-"set statusline+=%*
-"
-"set statusline+=%{StatuslineTrailingSpaceWarning()}
-"
-"set statusline+=%{StatuslineLongLineWarning()}
-"
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
+set statusline+=%#error#
+set statusline+=%{StatuslineTabWarning()}
+set statusline+=%*
+set statusline+=%{StatuslineTrailingSpaceWarning()}
+set statusline+=%{StatuslineLongLineWarning()}
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
 "display a warning if &paste is set
-"set statusline+=%#error#
-"set statusline+=%{&paste?'[paste]':''}
-"set statusline+=%*
+set statusline+=%#error#
+set statusline+=%{&paste?'[paste]':''}
+set statusline+=%*
 
 set statusline+=%=      "left/right separator
 
-"set statusline+=%{StatuslineCurrentHighlight()}\ \ "current highlight
+set statusline+=%{StatuslineCurrentHighlight()}\ \ "current highlight
 
 set statusline+=%c,     "cursor column
 set statusline+=%l/%L   "cursor line/total lines
@@ -225,8 +222,8 @@ set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
 set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
 
 "display tabs and trailing spaces
-"set list
-"set listchars=tab:\ \ ,extends:>,precedes:<
+set list
+set listchars=tab:\ \ ,extends:>,precedes:<
 " disabling list because it interferes with soft wrap
 
 set formatoptions-=o "dont continue comments when pushing o/O
@@ -245,6 +242,7 @@ syntax on
 
 "some stuff to get the mouse going in term
 set mouse=a
+set mouse=r
 set ttymouse=xterm2
 
 "hide buffers when not displayed
@@ -254,47 +252,53 @@ set hidden
 let g:CommandTMaxHeight=10
 let g:CommandTMatchWindowAtTop=1
 
+"if has("gui_running")
+    ""tell the term has 256 colors
+    "set t_Co=256
+
+    "colorscheme molokai
+    "set guitablabel=%M%t
+    "set lines=40
+    "set columns=115
+
+    "if has("gui_gnome")
+        "set term=gnome-256color
+        "colorscheme molokai
+        "set guifont=Inconsolata\ Medium\ 12
+    "endif
+
+    "if has("gui_mac") || has("gui_macvim")
+        "set guifont=Menlo:h14
+        "" key binding for Command-T to behave properly
+        "" uncomment to replace the Mac Command-T key to Command-T plugin
+        ""macmenu &File.New\ Tab key=<nop>
+        ""map <D-t> :CommandT<CR>
+        "" make Mac's Option key behave as the Meta key
+        "set invmmta
+        "try
+          "set transparency=5
+        "catch
+        "endtry
+    "endif
+
+    "if has("gui_win32") || has("gui_win32s")
+        "set guifont=Consolas:h12
+        "set enc=utf-8
+    "endif
+"else
+    ""dont load csapprox if there is no gui support - silences an annoying warning
+    "colorscheme molokai
+"endif
+
 if has("gui_running")
-    "tell the term has 256 colors
-    set t_Co=256
-
-    colorscheme railscasts
-    set guitablabel=%M%t
-    set lines=40
-    set columns=115
-
-    if has("gui_gnome")
-        set term=gnome-256color
-        colorscheme ir_dark
-        set guifont=Inconsolata\ Medium\ 12
-    endif
-
-    if has("gui_mac") || has("gui_macvim")
-        set guifont=Menlo:h14
-        " key binding for Command-T to behave properly
-        " uncomment to replace the Mac Command-T key to Command-T plugin
-        "macmenu &File.New\ Tab key=<nop>
-        "map <D-t> :CommandT<CR>
-        " make Mac's Option key behave as the Meta key
-        set invmmta
-        try
-          set transparency=5
-        catch
-        endtry
-    endif
-
-    if has("gui_win32") || has("gui_win32s")
-        set guifont=Consolas:h12
-        set enc=utf-8
-    endif
+  colorscheme cobalt
+  set guifont="Bitstream\ Vera\ Sans\ Mono\ 12"
 else
-    "dont load csapprox if there is no gui support - silences an annoying warning
-    let g:CSApprox_loaded = 1
+  colorscheme molokai
 endif
-
 " PeepOpen uses <Leader>p as well so you will need to redefine it so something
 " else in your ~/.vimrc file, such as:
-" nmap <silent> <Leader>q <Plug>PeepOpen
+nmap <silent> <Leader>q <Plug>PeepOpen
 
 silent! nmap <silent> <Leader>p :NERDTreeToggle<CR>
 nnoremap <silent> <C-f> :call FindInNERDTree()<CR> 
@@ -391,3 +395,176 @@ map <C-k> <C-w>k
 map <C-l> <C-w>l
 
 let ScreenShot = {'Icon':0, 'Credits':0, 'force_background':'#FFFFFF'} 
+
+noremap <F4> :set hlsearch! hlsearch?<CR>
+nnoremap <F5> :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
+syntax match NonText "^\ +"
+"autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
+"au BufAdd,BufNewFile,BufRead * nested tab sball
+
+
+vmap <silent> <backspace> dd
+map  <silent> <c-u> <esc>:u<cr>
+vmap <silent> <c-u> <esc>:u <cr><cr>v
+imap <silent> <c-u> <esc>:u <cr><cr>i
+
+command W w !sudo tee % >/dev/null
+command WQ wq
+
+
+" easier to reach, overrides TOP and BOTTOM of screen
+map H ^
+map L $
+
+" display line up/down (not actual)
+map <up> gk
+map <down> gj
+
+" search next/previous -- center in page
+nmap n nzz
+nmap N Nzz
+nmap <backspace> i<backspace>
+
+imap <a-left> <esc>:bprevious<cr>
+map <a-left> :bprevious<cr>
+vmap <a-left> <esc>:bprevious<cr>
+
+
+imap <a-right> <esc>:bnext<cr>
+map <a-right> :bnext<cr>
+vmap <a-right> <esc>:bnext<cr>
+
+set clipboard=unnamed
+
+command! -nargs=* -complete=file -bang Rename :call Rename("<args>", "<bang>")
+
+function! Rename(name, bang)
+	let l:curfile = expand("%:p")
+	let v:errmsg = ""
+	silent! exe "saveas" . a:bang . " " . a:name
+	if v:errmsg =~# '^$\|^E329'
+		if expand("%:p") !=# l:curfile && filewritable(expand("%:p"))
+			silent exe "bwipe! " . l:curfile
+			if delete(l:curfile)
+				echoerr "Could not delete " . l:curfile
+			endif
+		endif
+	else
+		echoerr v:errmsg
+	endif
+endfunction
+
+set nolist
+noremap <F2> :set list! list?<CR>
+set listchars=eol:¬,trail:•,tab:»-
+"tabs
+map <C-t> :tabnew<cr>
+imap <c-left> <Esc>:tabp<cr>
+imap <c-right> <Esc>:tabn<cr>
+map <c-left> :tabp<cr>
+map <c-right> :tabn<cr>
+map <c-q> :tabc<cr>
+"nerdcommenter
+noremap <silent>,cc <esc>:call NERDComment(1, "toggle")<cr>
+map <silent>,cc <esc>:call NERDComment(1, "toggle")<cr>
+vmap <silent>,cc <esc>:call NERDComment(1, "toggle")<cr>
+imap <silent>,cc <esc>:call NERDComment(1, "toggle")<cr>i
+map <silent>c<space> <esc>:call NERDComment(0, "toggle")<cr>
+vmap <silent>c<space> <esc>:call NERDComment(1, "toggle")<cr>
+
+noremap <F4> :set hlsearch! hlsearch?<CR>
+nnoremap <F5> :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
+au BufRead,BufNewFile *.js set ft=javascript syntax=jquery
+au BufRead,BufNewFile *.sass set ft=css syntax=sass
+au BufRead,BufNewFile *.scss set ft=css syntax=sass
+
+nnoremap <f3> :set invpaste paste?<cr>
+set pastetoggle=<f3>
+set showmode
+
+
+""
+""MY CUSTOM COMMANDS
+""
+"Set to auto read when a file is changed from the outside
+set autoread
+"Set mapleader
+let mapleader = ","
+let g:mapleader = ","
+"Fast saving
+nmap <leader>w :w!<cr>
+"Set 4 lines to the curors - when moving vertical..
+set so=4
+set magic
+"No sound on errors.
+set noerrorbells
+set novisualbell
+set switchbuf=usetab
+set tabstop=2
+set encoding=utf8
+set autoindent
+set smartindent
+set ignorecase
+set smartcase
+set cursorline
+set nocursorcolumn
+
+"Move a line of text using control
+
+imap <c-down> <esc>mz:m+<cr>`z
+imap <c-up> <esc>mz:m-2<cr>`z
+nmap <c-down> mz:m+<cr>`z
+nmap <c-up> mz:m-2<cr>`z
+vmap <c-down> :m'>+<cr>`<my`>mzgv`yo`z
+vmap <c-up> :m'<-2<cr>`>my`
+
+noremap <c-h> <gv
+noremap <c-l> >gv
+vmap <c-h> <gv
+vmap <c-l> >gv
+"Shift + arrows make a selection like in traditional editors
+imap <s-right> <esc>v
+imap <s-left> <esc>v
+map <s-right> <esc>v
+map <s-left> <esc>v
+
+imap <s-up> <esc>V
+imap <s-down> <esc>V
+map <s-up> <esc>V
+map <s-down> <esc>V
+
+vmap <s-down> <down>
+vmap <s-up> <up>
+vmap <s-left> <left>
+vmap <s-right> <right>
+"" nie trać zaznaczenia prz < i >
+noremap < <gv
+noremap > >gv
+
+" wyszukiwanie TYLKO w zaznaczonym fragmencie:
+vnoremap	/				<ESC>/\%><C-R>=line("'<")-1<CR>l\%<<C-R>=line("'>")+1<CR>l
+vnoremap	?				<ESC>?\%><C-R>=line("'<")-1<CR>l\%<<C-R>=line("'>")+1<CR>l
+
+" szukanie we wszystkich plikach:
+nmap		<F8>				:while !search( @/, "W") \| bnext \| endwhile<CR>
+
+
+
+let g:ctags_regenerate = 0 
+let generate_tags = 1
+set wrapscan
+
+
+au BufRead,BufNewFile *.js set ft=javascript syntax=jquery
+au BufRead,BufNewFile *.sass set ft=css syntax=sass
+au BufRead,BufNewFile *.scss set ft=css syntax=sass
+
+"something normal for copy paste"
+"nmap <C-V> "+p
+imap <C-V> <ESC>:set paste<CR><C-V>:set nopaste<CR>i
+vmap <C-C> "*yy
+
+"sessions"
+set sessionoptions=blank,buffers,curdir,folds,help,resize,tabpages,winsize
+map <a-q> :mksession! ~/.vim/.session <cr>
+map <a-s> :source ~/.vim/.session <cr>
