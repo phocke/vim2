@@ -468,7 +468,7 @@ map <c-q> :tabc<cr>
 noremap <silent>,cc <esc>:call NERDComment(1, "toggle")<cr>
 map <silent>,cc <esc>:call NERDComment(1, "toggle")<cr>
 vmap <silent>,cc <esc>:call NERDComment(1, "toggle")<cr>
-imap <silent>,cc <esc>:call NERDComment(1, "toggle")<cr>i
+imap <silent>,cc <esc>:call NERDComment(0, "toggle")<cr>i
 map <silent>c<space> <esc>:call NERDComment(0, "toggle")<cr>
 vmap <silent>c<space> <esc>:call NERDComment(1, "toggle")<cr>
 
@@ -482,7 +482,6 @@ nnoremap <f3> :set invpaste paste?<cr>
 set pastetoggle=<f3>
 set showmode
 
-
 ""
 ""MY CUSTOM COMMANDS
 ""
@@ -491,8 +490,6 @@ set autoread
 "Set mapleader
 let mapleader = ","
 let g:mapleader = ","
-"Fast saving
-nmap <leader>w :w!<cr>
 "Set 4 lines to the curors - when moving vertical..
 set so=4
 set magic
@@ -568,3 +565,38 @@ vmap <C-C> "*yy
 set sessionoptions=blank,buffers,curdir,folds,help,resize,tabpages,winsize
 map <a-q> :mksession! ~/.vim/.session <cr>
 map <a-s> :source ~/.vim/.session <cr>
+
+"go to given tab
+imap <a-1> <Esc>1gt
+imap <a-2> <Esc>2gt
+imap <a-3> <Esc>3gt
+imap <a-4> <Esc>4gt
+imap <a-5> <Esc>5gt
+imap <a-6> <Esc>6gt
+imap <a-7> <Esc>7gt
+imap <a-8> <Esc>8gt
+imap <a-9> <Esc>9gt
+
+
+vmap <a-1> <Esc>1gt
+vmap <a-2> <Esc>2gt
+vmap <a-3> <Esc>3gt
+vmap <a-4> <Esc>4gt
+vmap <a-5> <Esc>5gt
+vmap <a-6> <Esc>6gt
+vmap <a-7> <Esc>7gt
+vmap <a-8> <Esc>8gt
+vmap <a-9> <Esc>9gt
+
+map <a-1> <Esc>1gt
+map <a-2> <Esc>2gt
+map <a-3> <Esc>3gt
+map <a-4> <Esc>4gt
+map <a-5> <Esc>5gt
+map <a-6> <Esc>6gt
+map <a-7> <Esc>7gt
+map <a-8> <Esc>8gt
+map <a-9> <Esc>9gt
+map <a-w> <Esc>:wq<cr>
+imap <a-w> <Esc>:wq<cr>
+vmap <a-w> <Esc>:wq<cr>
