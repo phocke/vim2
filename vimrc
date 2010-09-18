@@ -477,6 +477,7 @@ nnoremap <F5> :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
 au BufRead,BufNewFile *.js set ft=javascript syntax=jquery
 au BufRead,BufNewFile *.sass set ft=css syntax=sass
 au BufRead,BufNewFile *.scss set ft=css syntax=sass
+au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
 
 nnoremap <f3> :set invpaste paste?<cr>
 set pastetoggle=<f3>
