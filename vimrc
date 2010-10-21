@@ -1,4 +1,6 @@
 "necessary on some Linux distros for pathogen to properly load bundles
+set nocompatible
+set encoding=utf8
 filetype off
 set t_Co=256
 "load pathogen managed plugins
@@ -6,7 +8,6 @@ call pathogen#runtime_append_all_bundles()
 
 "Use Vim settings, rather then Vi settings (much better!).
 "This must be first, because it changes other options as a side effect.
-set nocompatible
 
 "allow backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -411,6 +412,7 @@ imap <silent> <c-u> <esc>:u <cr><cr>i
 command W w !sudo tee % >/dev/null
 command WQ wq
 
+map gs :%s      
 
 " easier to reach, overrides TOP and BOTTOM of screen
 map H ^
@@ -456,7 +458,7 @@ endfunction
 
 set nolist
 noremap <F2> :set list! list?<CR>
-set listchars=eol:¬,trail:•,tab:»-
+"set listchars=eol:�,tab:»-
 "tabs
 map <C-t> :tabnew<cr>
 imap <c-left> <Esc>:tabp<cr>
@@ -474,9 +476,6 @@ vmap <silent>c<space> <esc>:call NERDComment(1, "toggle")<cr>
 
 noremap <F4> :set hlsearch! hlsearch?<CR>
 nnoremap <F5> :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
-au BufRead,BufNewFile *.js set ft=javascript syntax=jquery
-au BufRead,BufNewFile *.sass set ft=css syntax=sass
-au BufRead,BufNewFile *.scss set ft=css syntax=sass
 
 nnoremap <f3> :set invpaste paste?<cr>
 set pastetoggle=<f3>
@@ -498,7 +497,6 @@ set noerrorbells
 set novisualbell
 set switchbuf=usetab
 set tabstop=2
-set encoding=utf8
 set autoindent
 set smartindent
 set ignorecase
@@ -552,7 +550,8 @@ let generate_tags = 1
 set wrapscan
 
 
-au BufRead,BufNewFile *.js set ft=javascript syntax=jquery
+au BufRead,BufNewFile *.js set ft=javascript syntax=javascript
+"au BufRead,BufNewFile *.js set ft=javascript syntax=jquery
 au BufRead,BufNewFile *.sass set ft=css syntax=sass
 au BufRead,BufNewFile *.scss set ft=css syntax=sass
 
