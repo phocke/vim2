@@ -562,7 +562,7 @@ au BufRead,BufNewFile *.scss set ft=css syntax=sass
 "something normal for copy paste"
 "nmap <C-V> "+p
 imap <C-V> <ESC>:set paste<CR><C-V>:set nopaste<CR>i
-vmap <C-C> "*yy
+"vmap <C-C> "*yy
 
 "sessions"
 set sessionoptions=blank,buffers,curdir,folds,help,resize,tabpages,winsize
